@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Access Page</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f3f3f3;
+      }
+
+      .container {
+        text-align: center;
+        padding: 2rem;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      input[type="date"] {
+        padding: 0.5rem;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        padding: 0.7rem 1.5rem;
+        font-size: 1rem;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .error {
+        color: red;
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Surprise page</h1>
+      <p>
+        If you land successfully on this page, it means you followed all the
+        instructions beforehand. Now, to access this page, you need to enter a
+        particular date that is special for both of us.
+      </p>
+      <input type="date" id="date-picker" />
+      <button id="submit-btn">Submit</button>
+      <p id="error-message" class="error hidden">
+        Incorrect date. Please try again.
+      </p>
+      <div id="thank-you-message" class="hidden">
+        <h2>You're right! 🎉</h2>
+        <p>You have successfully entered the right date.</p>
+        <a href="protected.html">
+          <button>Continue to the next step</button>
+        </a>
+      </div>
+    </div>
+
+    <script>
+      // Set the correct date (format: YYYY-MM-DD)
+      const CORRECT_DATE = "2024-06-26"; // Replace with your desired date
+
+      const datePicker = document.getElementById("date-picker");
+      const submitBtn = document.getElementById("submit-btn");
+      const errorMessage = document.getElementById("error-message");
+      const thankYouMessage = document.getElementById("thank-you-message");
+
+      submitBtn.addEventListener("click", () => {
+        if (datePicker.value === CORRECT_DATE) {
+          errorMessage.classList.add("hidden");
+          thankYouMessage.classList.remove("hidden");
+          datePicker.style.display = "none";
+          submitBtn.style.display = "none";
+        } else {
+          errorMessage.classList.remove("hidden");
+        }
+      });
+
+      // Optional: Allow pressing "Enter" to submit the date
+      datePicker.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          submitBtn.click();
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Perfect Day</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Plan Our Perfect Day ❤️</h1>
+      <form
+        action="https://api.web3forms.com/submit"
+        method="POST"
+        id="preferences-form"
+      >
+        <!-- Web3Forms Public Access Key -->
+        <input
+          type="hidden"
+          name="access_key"
+          value="5f158ac3-1fd5-4042-9bb1-d7d933e9c29e"
+        />
+
+        <!-- Email field for notifications -->
+        <input type="hidden" name="from_name" value="Your Perfect Day Form" />
+        <input type="hidden" name="from_email" value="contact@arlibera.ma" />
+        <input
+          type="hidden"
+          name="subject"
+          value="New Perfect Day Plan Submission"
+        />
+
+        <div class="form-group">
+          <label for="time">Choose the time of your arrival:</label>
+          <input type="time" id="time" name="time" required />
+        </div>
+
+        <div class="form-group">
+          <label for="cartoon">Pick a cartoon/TV show:</label>
+          <select id="cartoon" name="cartoon" required>
+            <option value="">Select</option>
+            <option value="Adventure Time">Adventure Time</option>
+            <option value="Avatar: The Last Airbender">
+              Avatar: The Last Airbender
+            </option>
+            <option value="Friends">Friends</option>
+            <option value="Her Choice">Her Choice (Surprise Me!)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="food">What should we eat?</label>
+          <select id="food" name="food" required>
+            <option value="">Select</option>
+            <option value="Pizza">Pizza</option>
+            <option value="Sushi">Sushi</option>
+            <option value="Tacos">Tacos</option>
+            <option value="Chocolate Cake">Chocolate Cake</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="activities">Pick up to 5 preferred activities:</label>
+          <div class="activity-grid">
+            <div class="activity-box" data-activity="movie-night">
+              <div class="emoji">🍿</div>
+              <span>Movie Night</span>
+            </div>
+            <div class="activity-box" data-activity="cooking">
+              <div class="emoji">🍳</div>
+              <span>Cook something new</span>
+            </div>
+            <div class="activity-box" data-activity="yoga">
+              <div class="emoji">🧘‍♀️</div>
+              <span>Yoga & Meditation</span>
+            </div>
+            <div class="activity-box" data-activity="beach">
+              <div class="emoji">🏖️</div>
+              <span>Go to the beach - Rinkon</span>
+            </div>
+            <div class="activity-box" data-activity="roleplay">
+              <div class="emoji">🎭</div>
+              <span>New roleplay theme</span>
+            </div>
+            <div class="activity-box" data-activity="pizza-hut">
+              <div class="emoji">🍕</div>
+              <span>Go to Pizza Hut</span>
+            </div>
+            <div class="activity-box" data-activity="morning-jogging">
+              <div class="emoji">🏃‍♂️</div>
+              <span>Morning jogging</span>
+            </div>
+            <div class="activity-box" data-activity="board-games">
+              <div class="emoji">🎲</div>
+              <span>Board Games</span>
+            </div>
+            <div class="activity-box" data-activity="dancing">
+              <div class="emoji">💃</div>
+              <span>Dancing</span>
+            </div>
+            <div class="activity-box" data-activity="music">
+              <div class="emoji">🎶</div>
+              <span>Music - Karaoke</span>
+            </div>
+            <div class="activity-box" data-activity="walk">
+              <div class="emoji">🚶‍♀️</div>
+              <span>Go for a long walk</span>
+            </div>
+            <div class="activity-box" data-activity="sunset-bou3nan">
+              <div class="emoji">🌅</div>
+              <span>Sunset at Bou3nan</span>
+            </div>
+            <div class="activity-box" data-activity="museum">
+              <div class="emoji">🏛️</div>
+              <span>Visit a Museum</span>
+            </div>
+            <div class="activity-box" data-activity="sushi">
+              <div class="emoji">🍣</div>
+              <span>Eat Sushi</span>
+            </div>
+            <div class="activity-box" data-activity="secret">
+              <div class="emoji">🤫</div>
+              <span
+                >Yazid's<span class="new-label">NEW</span> Activity
+                <i>(Surprise)</i>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hidden input to store selected activities -->
+        <input type="hidden" name="activities" id="activities" />
+
+        <div class="form-group">
+          <label for="message">Personal message to send:</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            placeholder="Write your message here..."
+            required
+          ></textarea>
+        </div>
+
+        <!-- Custom Confirmation / Success Page -->
+        <input
+          type="hidden"
+          name="redirect"
+          value="http://localhost:3000/thanks.html"
+        />
+
+        <button type="submit">Submit</button>
+      </form>
+
+      <div id="result" class="hidden">
+        <h2>Your Plan is Submitted! 🎉</h2>
+        <p>Thank you! Your inputs have been sent.</p>
+      </div>
+    </div>
+
+    <script>
+      // Maximum number of activities that can be selected
+      const MAX_SELECTIONS = 5;
+      const selectedActivities = [];
+
+      // Get all the activity boxes
+      const activityBoxes = document.querySelectorAll(".activity-box");
+
+      activityBoxes.forEach((box) => {
+        box.addEventListener("click", () => {
+          // Get the activity name
+          const activityName = box.getAttribute("data-activity");
+
+          // Count the number of selected activities
+          const selectedCount = selectedActivities.length;
+
+          // If the clicked box is already selected, deselect it
+          if (box.classList.contains("selected")) {
+            box.classList.remove("selected");
+            const index = selectedActivities.indexOf(activityName);
+            if (index > -1) {
+              selectedActivities.splice(index, 1);
+            }
+          } else {
+            // If less than the max number of selections, select the activity
+            if (selectedCount < MAX_SELECTIONS) {
+              box.classList.add("selected");
+              selectedActivities.push(activityName);
+            } else {
+              alert(
+                `You can only select a maximum of ${MAX_SELECTIONS} activities.`
+              );
+            }
+          }
+
+          // Update the hidden input with the selected activities
+          document.getElementById("activities").value =
+            selectedActivities.join(",");
+        });
+      });
+    </script>
+  </body>
+</html>

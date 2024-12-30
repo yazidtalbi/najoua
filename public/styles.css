@@ -1,0 +1,114 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #fdf5f7;
+  color: #333;
+}
+
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #ff6f61;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input,
+select,
+textarea,
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #ff6f61;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+}
+
+button:hover {
+  background-color: #e65c50;
+}
+
+.hidden {
+  display: none;
+}
+
+.activity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.activity-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  width: 150px; /* Set a fixed width for the square */
+  height: 150px; /* Set the same height as width */
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.activity-box.selected {
+  border: 2px solid blue; /* Blue outline when selected */
+}
+
+.activity-box .emoji {
+  font-size: 60px;
+}
+
+.activity-box span {
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.activity-box:hover {
+  background-color: #f0f0f0;
+}
+
+/* Optional: Add a hover effect to show when user is about to select */
+.activity-box:hover {
+  background-color: #e0e0e0;
+}
+
+.new-label {
+  background-color: #ff5733; /* You can change the color */
+  color: white;
+  font-weight: bold;
+  padding: 0 5px;
+  border-radius: 5px;
+  font-size: 0.8em;
+  margin-left: 5px;
+}
